@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Add Student</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><main class="container"><h1>Add Student</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<p class="message {{ category }}">{{ message }}</p>{% endfor %}{% endwith %}
+<form method="post" action="{{ url_for('add_student') }}" class="form-grid">
+<label>Full name<input name="name" required maxlength="100"></label><label>Roll number<input name="roll_no" required maxlength="50"></label><label>Course<input name="course" required maxlength="100"></label><label>Marks (0-100)<input type="number" name="marks" min="0" max="100" required></label><label>Email<input type="email" name="email" required maxlength="254"></label><label>Phone<input type="tel" name="phone" required maxlength="30"></label><label>Department<input name="department" required maxlength="100"></label><label>Attendance (0-100)<input type="number" name="attendance" min="0" max="100" required></label>
+<div class="form-actions"><button type="submit">Save Student</button><a href="{{ url_for('index') }}">Home</a></div></form></main></body></html>

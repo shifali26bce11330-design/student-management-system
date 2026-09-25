@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student List</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><main class="container wide"><h1>Student Records</h1>
+{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<p class="message {{ category }}">{{ message }}</p>{% endfor %}{% endwith %}
+{% if students %}<div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Roll No.</th><th>Course</th><th>Marks</th><th>Email</th><th>Phone</th><th>Department</th><th>Attendance</th><th>Actions</th></tr></thead><tbody>
+{% for student in students %}<tr><td>{{ student.id }}</td><td>{{ student.name }}</td><td>{{ student.roll_no }}</td><td>{{ student.course }}</td><td>{{ student.marks }}</td><td>{{ student.email }}</td><td>{{ student.phone }}</td><td>{{ student.department }}</td><td>{{ student.attendance }}%</td><td class="row-actions"><a href="{{ url_for('update_student', student_id=student.id) }}">Edit</a><form method="post" action="{{ url_for('delete_student', student_id=student.id) }}" onsubmit="return confirm('Delete this student record?');"><button class="danger" type="submit">Delete</button></form></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<p>No student records yet. Add a student to get started.</p>{% endif %}
+<nav class="actions"><a class="button" href="{{ url_for('add_student') }}">Add Student</a><a class="button secondary" href="{{ url_for('search') }}">Search</a><a href="{{ url_for('index') }}">Home</a></nav></main></body></html>
